@@ -18,3 +18,7 @@ func New() *BookController {
 func (bookController *BookController) FindAll() []entity.Book {
 	return bookController.bookService.FindAll()
 }
+
+func (bookController *BookController) FindBookById(id int) entity.Book {
+	return entity.Book{}
+}
