@@ -15,7 +15,7 @@ func SetUpServer() *gin.Engine {
 	})
 
 	server.GET("/books", func(context *gin.Context) {
-		context.String(200, "endpoint working")
+		context.JSON(200, bookController.FindAll())
 	})
 
 	return server
