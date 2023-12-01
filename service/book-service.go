@@ -12,3 +12,7 @@ type BookService struct {
 func New() *BookService {
 	return &BookService{repository.DefaultBooks()}
 }
+
+func (service *BookService) FindAll() []entity.Book {
+	return service.books
+}

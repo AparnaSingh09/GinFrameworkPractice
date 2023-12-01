@@ -6,7 +6,12 @@ import (
 	"testing"
 )
 
+var bookService = New()
+
 func TestNew(t *testing.T) {
-	bookService := New()
 	assert.Equal(t, repository.DefaultBooks(), bookService.books)
+}
+
+func TestBookService_FindAll(t *testing.T) {
+	assert.Equal(t, repository.DefaultBooks(), bookService.FindAll())
 }
