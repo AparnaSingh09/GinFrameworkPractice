@@ -16,3 +16,7 @@ func New() *BookService {
 func (service *BookService) FindAll() []entity.Book {
 	return service.books
 }
+
+func (service *BookService) FindBookById(id int) entity.Book {
+	return entity.Book{}
+}

@@ -25,7 +25,7 @@ func TestFindAll(t *testing.T) {
 	server.ServeHTTP(w, req)
 
 	actual, _ := ioutil.ReadAll(w.Result().Body)
-	expected := "[{\"title\":\"The Bee Sting\",\"author\":\"Paul Murray\",\"price\":\"700\"},{\"title\":\"North Woods\",\"author\":\"Daniel Mason\",\"price\":\"900\"}]"
+	expected := "[{\"id\":1,\"title\":\"The Bee Sting\",\"author\":\"Paul Murray\",\"price\":\"700\"},{\"id\":2,\"title\":\"North Woods\",\"author\":\"Daniel Mason\",\"price\":\"900\"}]"
 
 	assert.Equal(t, 200, w.Code)
 	assert.Equal(t, string(expected), string(actual))
