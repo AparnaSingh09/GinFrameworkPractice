@@ -18,5 +18,12 @@ func (service *BookService) FindAll() []entity.Book {
 }
 
 func (service *BookService) FindBookById(id int) entity.Book {
+	for _, book := range service.books {
+		if book.Id == id {
+			return book
+		} else {
+			//TODO
+		}
+	}
 	return entity.Book{}
 }
