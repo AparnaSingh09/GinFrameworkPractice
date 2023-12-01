@@ -20,5 +20,5 @@ func (bookController *BookController) FindAll() []entity.Book {
 }
 
 func (bookController *BookController) FindBookById(id int) entity.Book {
-	return entity.Book{}
+	return bookController.bookService.FindBookById(id)
 }
