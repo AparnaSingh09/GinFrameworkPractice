@@ -2,6 +2,7 @@ package service
 
 import (
 	"GinFrameworkPractice/entity"
+	"GinFrameworkPractice/repository"
 )
 
 type BookService struct {
@@ -9,5 +10,5 @@ type BookService struct {
 }
 
 func New() *BookService {
-	return &BookService{}
+	return &BookService{repository.DefaultBooks()}
 }
