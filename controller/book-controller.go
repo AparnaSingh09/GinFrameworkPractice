@@ -16,5 +16,5 @@ func New() *BookController {
 }
 
 func (bookController *BookController) FindAll() []entity.Book {
-	return []entity.Book{}
+	return bookController.bookService.FindAll()
 }
