@@ -28,5 +28,8 @@ func (bookController *BookController) AddBook(context *gin.Context) entity.Book 
 	var book entity.Book
 	context.BindJSON(&book)
 	return bookController.bookService.AddBook(book)
+}
 
+func (bookController *BookController) RemoveBook(id int) entity.Book {
+	return entity.Book{}
 }

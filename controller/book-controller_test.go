@@ -51,3 +51,7 @@ func TestBookController_AddBook(t *testing.T) {
 	ctx.Request.Body = io.NopCloser(bytes.NewBuffer(obj))
 	assert.Equal(t, testBook, bookController.AddBook(ctx))
 }
+
+func TestBookController_RemoveBook(t *testing.T) {
+	assert.Equal(t, book, bookController.RemoveBook(1))
+}
