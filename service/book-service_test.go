@@ -8,6 +8,12 @@ import (
 )
 
 var bookService = New()
+var book = entity.Book{
+	Id:     1,
+	Title:  "The Bee Sting",
+	Author: "Paul Murray",
+	Price:  "700",
+}
 
 func TestNew(t *testing.T) {
 	assert.Equal(t, repository.DefaultBooks(), bookService.books)
@@ -18,11 +24,9 @@ func TestBookService_FindAll(t *testing.T) {
 }
 
 func TestBookService_FindBookById(t *testing.T) {
-	book := entity.Book{
-		Id:     1,
-		Title:  "The Bee Sting",
-		Author: "Paul Murray",
-		Price:  "700",
-	}
 	assert.Equal(t, book, bookService.FindBookById(1))
+}
+
+func TestAddBook(t *testing.T) {
+	assert.Equal(t, book, bookService.AddBook(book))
 }

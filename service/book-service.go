@@ -27,3 +27,7 @@ func (service *BookService) FindBookById(id int) entity.Book {
 	}
 	return entity.Book{}
 }
+
+func (service *BookService) AddBook(book entity.Book) entity.Book {
+	return entity.Book{}
+}
