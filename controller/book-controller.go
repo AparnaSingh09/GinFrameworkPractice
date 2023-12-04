@@ -3,6 +3,7 @@ package controller
 import (
 	"GinFrameworkPractice/entity"
 	"GinFrameworkPractice/service"
+	"github.com/gin-gonic/gin"
 )
 
 type BookController struct {
@@ -21,4 +22,10 @@ func (bookController *BookController) FindAll() []entity.Book {
 
 func (bookController *BookController) FindBookById(id int) entity.Book {
 	return bookController.bookService.FindBookById(id)
+}
+
+func (bookController *BookController) AddBook(context *gin.Context) entity.Book {
+	var book entity.Book
+	return bookController.bookService.AddBook(book)
+
 }
