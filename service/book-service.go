@@ -29,5 +29,6 @@ func (service *BookService) FindBookById(id int) entity.Book {
 }
 
 func (service *BookService) AddBook(book entity.Book) entity.Book {
-	return entity.Book{}
+	service.books = append(service.books, book)
+	return book
 }
