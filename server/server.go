@@ -30,6 +30,9 @@ func SetUpServer() *gin.Engine {
 	})
 
 	server.DELETE("/books", func(context *gin.Context) {
+		idStr := context.Query("id")
+		id, _ := strconv.Atoi(idStr)
+		context.JSON(200, bookController.RemoveBook(id))
 	})
 
 	return server
