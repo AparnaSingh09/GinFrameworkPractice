@@ -1,6 +1,7 @@
 package server
 
 import (
+	basic_auth "GinFrameworkPractice/basic-auth"
 	"GinFrameworkPractice/controller"
 	"github.com/gin-gonic/gin"
 	"strconv"
@@ -10,6 +11,7 @@ var bookController *controller.BookController = controller.New()
 
 func SetUpServer() *gin.Engine {
 	server := gin.Default()
+	server.Use(basic_auth.BasicAuth())
 
 	server.GET("/test", func(context *gin.Context) {
 		context.String(200, "endpoint working")
