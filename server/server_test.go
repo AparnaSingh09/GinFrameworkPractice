@@ -31,3 +31,15 @@ func TestFindAll(t *testing.T) {
 	assert.Equal(t, string(expected), string(actual))
 
 }
+
+func TestFindById(t *testing.T) {
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/books/1", nil)
+	server.ServeHTTP(w, req)
+
+	actual, _ := ioutil.ReadAll(w.Result().Body)
+	expected := "{\"id\":1,\"title\":\"The Bee Sting\",\"author\":\"Paul Murray\",\"price\":\"700\"}"
+	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, string(expected), string(actual))
+
+}
