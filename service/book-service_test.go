@@ -33,4 +33,5 @@ func TestAddBook(t *testing.T) {
 
 func TestBookService_RemoveBook(t *testing.T) {
 	assert.Equal(t, book, bookService.RemoveBook(1))
+	assert.Equal(t, 1, len(bookService.books))
 }

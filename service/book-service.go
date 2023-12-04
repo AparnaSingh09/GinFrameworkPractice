@@ -34,5 +34,19 @@ func (service *BookService) AddBook(book entity.Book) entity.Book {
 }
 
 func (service *BookService) RemoveBook(id int) entity.Book {
-	return entity.Book{}
+	book := service.FindBookById(id)
+	return removeBook(service, book)
+	//TODO if id not found
+}
+
+func removeBook(service *BookService, book entity.Book) entity.Book {
+	var newBooks []entity.Book
+	for i, j := range service.books {
+		if j.Id == book.Id {
+			newBooks = service.books[0:i]
+			newBooks = append(service.books[i+1 : len(service.books)])
+		}
+	}
+	service.books = newBooks
+	return book
 }
