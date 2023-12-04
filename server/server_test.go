@@ -1,7 +1,11 @@
 package server
 
 import (
+	"GinFrameworkPractice/entity"
+	"bytes"
+	"encoding/json"
 	"github.com/stretchr/testify/assert"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -39,6 +43,25 @@ func TestFindById(t *testing.T) {
 
 	actual, _ := ioutil.ReadAll(w.Result().Body)
 	expected := "{\"id\":1,\"title\":\"The Bee Sting\",\"author\":\"Paul Murray\",\"price\":\"700\"}"
+	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, string(expected), string(actual))
+
+}
+
+func TestAddBook(t *testing.T) {
+	w := httptest.NewRecorder()
+	testBook := entity.Book{
+		Id:     4,
+		Title:  "abc",
+		Author: "jnv",
+		Price:  "600",
+	}
+	obj, _ := json.Marshal(testBook)
+	req, _ := http.NewRequest("POST", "/books", io.NopCloser(bytes.NewBuffer(obj)))
+	server.ServeHTTP(w, req)
+
+	actual, _ := ioutil.ReadAll(w.Result().Body)
+	expected := "{\"id\":4,\"title\":\"abc\",\"author\":\"jnv\",\"price\":\"600\"}"
 	assert.Equal(t, 200, w.Code)
 	assert.Equal(t, string(expected), string(actual))
 

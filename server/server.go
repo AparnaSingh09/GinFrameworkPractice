@@ -25,5 +25,9 @@ func SetUpServer() *gin.Engine {
 		context.JSON(200, bookController.FindBookById(id))
 	})
 
+	server.POST("/books", func(context *gin.Context) {
+		context.JSON(200, "")
+	})
+
 	return server
 }
