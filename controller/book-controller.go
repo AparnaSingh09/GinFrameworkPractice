@@ -31,5 +31,5 @@ func (bookController *BookController) AddBook(context *gin.Context) entity.Book 
 }
 
 func (bookController *BookController) RemoveBook(id int) entity.Book {
-	return entity.Book{}
+	return bookController.bookService.RemoveBook(id)
 }
