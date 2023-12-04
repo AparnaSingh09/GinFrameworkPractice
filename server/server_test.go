@@ -64,5 +64,14 @@ func TestAddBook(t *testing.T) {
 	expected := "{\"id\":4,\"title\":\"abc\",\"author\":\"jnv\",\"price\":\"600\"}"
 	assert.Equal(t, 200, w.Code)
 	assert.Equal(t, string(expected), string(actual))
+}
 
+func TestRemoveBook(t *testing.T) {
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("DELETE", "/books?id=1", nil)
+	server.ServeHTTP(w, req)
+	actual, _ := ioutil.ReadAll(w.Result().Body)
+	expected := "{\"id\":1,\"title\":\"The Bee Sting\",\"author\":\"Paul Murray\",\"price\":\"700\"}"
+	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, string(expected), string(actual))
 }
