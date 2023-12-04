@@ -30,3 +30,7 @@ func TestBookService_FindBookById(t *testing.T) {
 func TestAddBook(t *testing.T) {
 	assert.Equal(t, book, bookService.AddBook(book))
 }
+
+func TestBookService_RemoveBook(t *testing.T) {
+	assert.Equal(t, book, bookService.RemoveBook(1))
+}

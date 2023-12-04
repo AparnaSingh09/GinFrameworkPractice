@@ -32,3 +32,7 @@ func (service *BookService) AddBook(book entity.Book) entity.Book {
 	service.books = append(service.books, book)
 	return book
 }
+
+func (service *BookService) RemoveBook(id int) entity.Book {
+	return entity.Book{}
+}
