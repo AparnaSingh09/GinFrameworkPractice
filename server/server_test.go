@@ -75,3 +75,15 @@ func TestRemoveBook(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	assert.Equal(t, string(expected), string(actual))
 }
+
+func TestLogin(t *testing.T) {
+	w := httptest.NewRecorder()
+	creds := entity.Credentials{
+		Username: "TW",
+		Password: "tw",
+	}
+	obj, _ := json.Marshal(creds)
+	req, _ := http.NewRequest("POST", "/login", io.NopCloser(bytes.NewBuffer(obj)))
+	server.ServeHTTP(w, req)
+	assert.Equal(t, 200, w.Code)
+}
