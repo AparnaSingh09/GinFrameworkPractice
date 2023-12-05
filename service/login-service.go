@@ -13,5 +13,5 @@ func NewLoginService() *LoginService {
 }
 
 func (loginService *LoginService) Login(username string, password string) bool {
-	return false
+	return username == loginService.authorizedUsername && password == loginService.authorizedPassword
 }
