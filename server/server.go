@@ -1,6 +1,7 @@
 package server
 
 import (
+	"GinFrameworkPractice/auth"
 	"GinFrameworkPractice/controller"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -18,26 +19,6 @@ func SetUpServer() *gin.Engine {
 		context.String(200, "endpoint working")
 	})
 
-	server.GET("/books", func(context *gin.Context) {
-		context.JSON(200, bookController.FindAll())
-	})
-
-	server.GET("/books/:id", func(context *gin.Context) {
-		idString := context.Param("id")
-		id, _ := strconv.Atoi(idString)
-		context.JSON(200, bookController.FindBookById(id))
-	})
-
-	server.POST("/books", func(context *gin.Context) {
-		context.JSON(200, bookController.AddBook(context))
-	})
-
-	server.DELETE("/books", func(context *gin.Context) {
-		idStr := context.Query("id")
-		id, _ := strconv.Atoi(idStr)
-		context.JSON(200, bookController.RemoveBook(id))
-	})
-
 	// Login Endpoint: Authentication + Token creation
 	server.POST("/login", func(ctx *gin.Context) {
 		token := loginController.Login(ctx)
@@ -49,6 +30,29 @@ func SetUpServer() *gin.Engine {
 			ctx.JSON(http.StatusUnauthorized, nil)
 		}
 	})
+
+	apiRoutes := server.Group("/api", auth.AuthorizeJWT())
+	{
+		apiRoutes.GET("/books", func(context *gin.Context) {
+			context.JSON(200, bookController.FindAll())
+		})
+
+		apiRoutes.GET("/books/:id", func(context *gin.Context) {
+			idString := context.Param("id")
+			id, _ := strconv.Atoi(idString)
+			context.JSON(200, bookController.FindBookById(id))
+		})
+
+		apiRoutes.POST("/books", func(context *gin.Context) {
+			context.JSON(200, bookController.AddBook(context))
+		})
+
+		apiRoutes.DELETE("/books", func(context *gin.Context) {
+			idStr := context.Query("id")
+			id, _ := strconv.Atoi(idStr)
+			context.JSON(200, bookController.RemoveBook(id))
+		})
+	}
 
 	return server
 }
